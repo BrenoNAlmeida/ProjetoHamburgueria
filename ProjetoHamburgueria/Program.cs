@@ -19,9 +19,13 @@ namespace ProjetoHamburgueria
             Atendente atendente;
             Cozinheiro cozinheiro ;
             Cardapio cardapio = new Cardapio();
-            Cliente cliente = new Cliente("Tonhão", "123.456.789-12", 24, 'M');
+            //Cliente cliente = new Cliente("Tonhão", "123.456.789-12", 24, 'M');
             int idpedidos = 1;
             int op = 0;
+            int id;
+            string nome;
+            Bebida bebida ;
+            Comida comida ;
             while(op != 4)
             {
             System.Console.WriteLine("1 - cliente\n2 - atendente\n3 - cozinheiro\n4 - finalizar");
@@ -35,7 +39,16 @@ namespace ProjetoHamburgueria
                         switch(op1)
                         {
                             case 1:
-                                cliente.VerCardapio(cardapio);
+                                System.Console.WriteLine("Comidas:");
+                                for (int c = 0; c < cardapio.getComidas().Count ; c++)
+                                {
+                                    System.Console.WriteLine(cardapio.getComidas()[c].id + " - " + cardapio.getComidas()[c].nome);
+                                }
+                                System.Console.WriteLine("Bebidas:");
+                                for (int c = 0; c < cardapio.getBebidas().Count; c++)
+                                {
+                                    System.Console.WriteLine(cardapio.getBebidas()[c].id + " - " + cardapio.getBebidas()[c].nome);
+                                }
                                 
                                 System.Console.WriteLine("realizar outra operação ?\n 1 - sim\n2 - não");
                                 continua = Convert.ToInt32(Console.ReadLine());
@@ -133,7 +146,88 @@ namespace ProjetoHamburgueria
                                 continua = Convert.ToInt32(Console.ReadLine());
                                 break;
                             case 4:
-                                cardapio.editarCardapio();
+                                System.Console.WriteLine("deseja editar uma bebida ou comida ?\n");
+                                System.Console.WriteLine("1 - Adicionar Bebida\n2 - adicionar Comida\n3 - editar Comida\n4 - editar bebida\n5 - remover Comida\n6 - remover Bebida");
+                                op2 = Int32.Parse(Console.ReadLine());
+                                switch(op2)
+                                        {  
+                                        //adicionar bebida
+                                        case 1:
+                                            Console.WriteLine("id da bebida");
+                                            id = Int32.Parse(Console.ReadLine());
+                                            Console.WriteLine("nome da bebida");
+                                            nome = Console.ReadLine();
+                                            bebida = new Bebida(id,nome);
+                                            cardapio.addBebida(bebida);
+                                            break;
+                                        //adicionar comida
+                                        case 2:
+                                            Console.WriteLine("id da comida");
+                                            id = Int32.Parse(Console.ReadLine());
+                                            Console.WriteLine("nome da comida");
+                                            nome = Console.ReadLine();
+                                            comida = new Comida(id,nome);
+                                            cardapio.addComida(comida);
+                                            break;
+                                        //listar cardapio
+                                            //editar comida
+                                        case 3:
+                                            //mostra os bagulho
+                                            System.Console.WriteLine("Comidas:");
+                                            for (int c = 0; c < cardapio.getComidas().Count ; c++)
+                                            {
+                                            System.Console.WriteLine(cardapio.getComidas()[c].id + " - " + cardapio.getComidas()[c].nome);
+                                            }
+                                            //vai editar
+                                            Console.WriteLine("id da comida");
+                                            id = Int32.Parse(Console.ReadLine());
+                                            Console.WriteLine("Novo nome da comida");
+                                            nome = Console.ReadLine();
+                                            cardapio.editarcomida(id,nome);
+                                            break;
+                                            // edita bebida
+                                        case 4:
+                                            //mostra os bagulho
+                                            System.Console.WriteLine("Bebidas:");
+                                            for (int c = 0; c < cardapio.getBebidas().Count; c++)
+                                            {
+                                                System.Console.WriteLine(cardapio.getBebidas()[c].id + " - " + cardapio.getBebidas()[c].nome);
+                                            }
+                                            //vai editar
+                                            Console.WriteLine("id da bebida");
+                                            id = Int32.Parse(Console.ReadLine());
+                                            Console.WriteLine("Novo nome da bebida");
+                                            nome = Console.ReadLine();
+                                            cardapio.editarbebida(id,nome);
+                                            break;
+                                        //remove comida
+                                        case 5:
+                                            
+                                            System.Console.WriteLine("Comidas:");
+                                            for (int c = 0; c < cardapio.getComidas().Count ; c++)
+                                            {
+                                            System.Console.WriteLine(cardapio.getComidas()[c].id + " - " + cardapio.getComidas()[c].nome);
+                                            }
+                                            //vai remover
+                                            Console.WriteLine("id da comida a ser removida");
+                                            id = Int32.Parse(Console.ReadLine());
+                                            cardapio.removecomida(id);
+                                            break;
+                                        // remove bebida
+                                        case 6:
+                                            System.Console.WriteLine("Bebidas:");
+                                            for (int c = 0; c < cardapio.getBebidas().Count; c++)
+                                            {
+                                                System.Console.WriteLine(cardapio.getBebidas()[c].id + " - " + cardapio.getBebidas()[c].nome);
+                                            }
+                                            //vai remover
+                                            Console.WriteLine("id da comida a ser removida");
+                                            id = Int32.Parse(Console.ReadLine());
+                                            cardapio.removebebida(id);
+                                            break;
+                                            
+                                            
+                                        }
                                 System.Console.WriteLine("realizar outra operação ?\n 1 - sim\n2 - não");
                                 continua = Convert.ToInt32(Console.ReadLine());
                                 break;
@@ -179,10 +273,84 @@ namespace ProjetoHamburgueria
                             cozinheiros[0].finalizarPedidoX(pedidoF);
                             break;
                         case 4:
-                            while(continua != 2)
-                            {
-                                pass = 1;
-                                cardapio.editarCardapio();
+                            switch(op2)
+                                        {  
+                                        //adicionar bebida
+                                        case 1:
+                                            Console.WriteLine("id da bebida");
+                                            id = Int32.Parse(Console.ReadLine());
+                                            Console.WriteLine("nome da bebida");
+                                            nome = Console.ReadLine();
+                                            bebida = new Bebida(id,nome);
+                                            cardapio.addBebida(bebida);
+                                            break;
+                                        //adicionar comida
+                                        case 2:
+                                            Console.WriteLine("id da comida");
+                                            id = Int32.Parse(Console.ReadLine());
+                                            Console.WriteLine("nome da comida");
+                                            nome = Console.ReadLine();
+                                            comida = new Comida(id,nome);
+                                            cardapio.addComida(comida);
+                                            break;
+                                            //editar comida
+                                        case 3:
+                                            //mostra os bagulho
+                                            System.Console.WriteLine("Comidas:");
+                                            for (int c = 0; c < cardapio.getComidas().Count ; c++)
+                                            {
+                                            System.Console.WriteLine(cardapio.getComidas()[c].id + " - " + cardapio.getComidas()[c].nome);
+                                            }
+                                            //vai editar
+                                            Console.WriteLine("id da comida");
+                                            id = Int32.Parse(Console.ReadLine());
+                                            Console.WriteLine("Novo nome da comida");
+                                            nome = Console.ReadLine();
+                                            cardapio.editarcomida(id,nome);
+                                            break;
+                                            // edita bebida
+                                        case 4:
+                                            //mostra os bagulho
+                                            System.Console.WriteLine("Bebidas:");
+                                            for (int c = 0; c < cardapio.getBebidas().Count; c++)
+                                            {
+                                                System.Console.WriteLine(cardapio.getBebidas()[c].id + " - " + cardapio.getBebidas()[c].nome);
+                                            }
+                                            //vai editar
+                                            Console.WriteLine("id da bebida");
+                                            id = Int32.Parse(Console.ReadLine());
+                                            Console.WriteLine("Novo nome da bebida");
+                                            nome = Console.ReadLine();
+                                            cardapio.editarbebida(id,nome);
+                                            break;
+                                        //remove comida
+                                        case 5:
+                                            
+                                            System.Console.WriteLine("Comidas:");
+                                            for (int c = 0; c < cardapio.getComidas().Count ; c++)
+                                            {
+                                            System.Console.WriteLine(cardapio.getComidas()[c].id + " - " + cardapio.getComidas()[c].nome);
+                                            }
+                                            //vai remover
+                                            Console.WriteLine("id da comida a ser removida");
+                                            id = Int32.Parse(Console.ReadLine());
+                                            cardapio.removecomida(id);
+                                            break;
+                                        // remove bebida
+                                        case 6:
+                                            System.Console.WriteLine("Bebidas:");
+                                            for (int c = 0; c < cardapio.getBebidas().Count; c++)
+                                            {
+                                                System.Console.WriteLine(cardapio.getBebidas()[c].id + " - " + cardapio.getBebidas()[c].nome);
+                                            }
+                                            //vai remover
+                                            Console.WriteLine("id da comida a ser removida");
+                                            id = Int32.Parse(Console.ReadLine());
+                                            cardapio.removebebida(id);
+                                            break;
+                                            
+                                            
+                                        }
                                 System.Console.WriteLine("realizar outra operação ?\n 1 - sim\n2 - não");
                                 continua = Convert.ToInt32(Console.ReadLine());
                             }
